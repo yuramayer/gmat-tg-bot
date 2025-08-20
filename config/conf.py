@@ -17,11 +17,17 @@ def get_checked_env(env_name: str):
 
 TEST_BOT_TOKEN = get_checked_env('TEST_BOT_TOKEN')
 PROD_BOT_TOKEN = get_checked_env('PROD_BOT_TOKEN')
+
 CLOUD_S3_ID_KEY = get_checked_env('CLOUD_S3_ID_KEY')
 CLOUD_S3_SECRET_KEY = get_checked_env('CLOUD_S3_SECRET_KEY')
 BUCKET_NAME = get_checked_env('BUCKET_NAME')
 ADMINS = get_checked_env('ADMINS')
 STAND = str(os.getenv('STAND'))
+DB_HOST = get_checked_env('DB_HOST')
+DB_NAME = get_checked_env('DB_NAME')
+DB_PORT = get_checked_env('DB_PORT')
+DB_USER = get_checked_env('DB_USER')
+DB_PASS = get_checked_env('DB_PASS')
 
 if STAND == 'LOCAL':
     BOT_TOKEN = TEST_BOT_TOKEN
