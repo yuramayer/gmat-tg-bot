@@ -1,13 +1,20 @@
-"""Bot reacts to the command /start to the everyone"""
+"""Bot reacts to the command /start for the everyone"""
 
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-from back.db_back import user_exists, add_user
-from back.bot_back import create_start_message
+from db_back.users import (
+    get_user_id,
+    register_user
+)
+from back.bot_back import (
+    should_reg_msg,
+    registration_msg,
+    already_registrated_msg
+)
 from back.msg_log import save_log_event
-from keyboards.menu_keyboard import menu_kb
+# from keyboards.menu_keyboard import menu_kb
 
 
 start_cmd_router = Router()
@@ -15,7 +22,7 @@ start_cmd_router = Router()
 
 @start_cmd_router.message(Command('start'))
 async def cmd_start(message: Message, state: FSMContext):
-    """Bot says hi to new user"""
+    """Bot reacts to the /start command"""
 
     save_log_event(
         message=message,
@@ -27,28 +34,49 @@ async def cmd_start(message: Message, state: FSMContext):
     )
 
     await state.clear()
-    chat_id = str(message.from_user.id)
-    if not user_exists(chat_id):
-        add_user(chat_id)
-        msg_answer = 'Словарь готов к работе 💫'
-        await message.answer(msg_answer)
+
+    tg_user_id = str(message.from_user.id)
+
+    user_db_id = await get_user_id(tg_user_id)
+
+    msg_txt = should_reg_msg()
+    message.answer(msg_txt)
+
+    save_log_event(
+        message=message,
+        direction='outbound',
+        text=msg_txt,
+        router='start_cmd_router',
+        method='cmd_start',
+        event_type='message'
+    )
+
+    if user_db_id is not None:
+        msg_txt = already_registrated_msg()
+        message.answer(msg_txt)
 
         save_log_event(
             message=message,
             direction='outbound',
-            text=msg_answer,
+            text=msg_txt,
             router='start_cmd_router',
             method='cmd_start',
             event_type='message'
         )
 
-    msg_answer = create_start_message()
-    await message.answer(msg_answer, reply_markup=menu_kb())
+    tg_username = None  # TODO: get username from tg
+    tg_fullname = None  # TODO: get full name from tg
+    await register_user(tg_user_id,
+                        tg_username,
+                        tg_fullname)
+
+    msg_txt = registration_msg()
+    message.answer(msg_txt)
 
     save_log_event(
         message=message,
         direction='outbound',
-        text=msg_answer,
+        text=msg_txt,
         router='start_cmd_router',
         method='cmd_start',
         event_type='message'
