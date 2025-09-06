@@ -1,0 +1,1 @@
+"""Создание Bot и Dispatcher"""
