@@ -101,3 +101,5 @@ class Config:
 
         self.logger.info("Loaded ADMINS: %s", admins)
         return admins
+
+config = Config()
