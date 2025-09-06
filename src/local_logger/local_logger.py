@@ -37,6 +37,3 @@ class LocalLogger:
 
     def critical(self, msg: str, *args, **kwargs) -> None:
         self.logger.critical(msg, *args, **kwargs)
-
-
-logger = LocalLogger()
