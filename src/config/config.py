@@ -67,7 +67,7 @@ class Config:
             default: str | None = None
             ) -> str | None:
         """
-        Optional variable to upload. Returns warning 
+        Optional variable to upload. Returns warning
         and default value if there's no any value
 
         Args:
@@ -76,7 +76,7 @@ class Config:
                 if there's no any value in .env file for this var
 
         Returns:
-            str: value for the environment var 
+            str: value for the environment var
         """
         value = os.getenv(name, default)
         if value is None:
@@ -100,11 +100,11 @@ class Config:
         if self.stand == 'DEV':
             test_bot_token = self._get_required('TEST_BOT_TOKEN')
             return test_bot_token
-        elif self.stand == 'PROD':
+        if self.stand == 'PROD':
             prod_bot_token = self._get_required('PROD_BOT_TOKEN')
             return prod_bot_token
         raise EnvironmentError(
-            f"❌ Stand should be 'DEV' or 'PROD'"
+            "❌ Stand should be 'DEV' or 'PROD'"
         )
 
     def _get_admin_ids(self) -> list[int]:
@@ -145,5 +145,6 @@ class Config:
 
         self.logger.info("Loaded ADMINS: %s", admins)
         return admins
+
 
 config = Config()
