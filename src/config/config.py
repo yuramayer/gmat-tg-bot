@@ -93,8 +93,8 @@ class Config:
         Uploads bot token depending on the stand
 
         Returns:
-            str: value for the 'stand' environment:
-                should be 'DEV' or 'PROD' in the .env
+            str: value for the 'stand' environment,
+            should be 'DEV' or 'PROD' in the .env
 
         Raises:
             EnvironmentError: if the environment variable
