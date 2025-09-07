@@ -13,7 +13,7 @@ class LocalLogger:
             ):
         """
         Initialize logger object
-        
+
         Args:
             name (str, optional): name for the current logger,
                 default = 'local_logger'
@@ -31,7 +31,7 @@ class LocalLogger:
             )
             handler.setFormatter(formatter)
             self.logger.addHandler(handler)
-    
+
     def debug(self, msg: str, *args, **kwargs) -> None:
         """
         Debug logger method
@@ -40,7 +40,7 @@ class LocalLogger:
             msg (str): message to log
         """
         self.logger.debug(msg, *args, **kwargs)
-    
+
     def info(self, msg: str, *args, **kwargs) -> None:
         """
         Info logger method
@@ -58,7 +58,7 @@ class LocalLogger:
             msg (str): message to log
         """
         self.logger.warning(msg, *args, **kwargs)
-    
+
     def error(self, msg: str, *args, **kwargs) -> None:
         """
         'Error message' logger method
