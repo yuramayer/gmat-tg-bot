@@ -10,7 +10,12 @@ class Config:
     """Config loader with required/optional env variables"""
 
     def __init__(self, env_path: Path | None = None):
-        """Initialize the Config object"""
+        """
+        Initialize the Config object
+        
+        Args:
+            env_path (pathlib.Path, optional): path to the .env file
+        """
         env_file = env_path or Path(".env")
         load_dotenv(dotenv_path=env_file, override=True)
         
@@ -36,7 +41,19 @@ class Config:
         self.db_pass = self._get_required('DB_PASS')
 
     def _get_required(self, name: str) -> str:
-        """Required variable. Raise if there's no any"""
+        """
+        Required variable to upload. Raise if there's no any
+        
+        Args:
+            name (str): name of the environment variable
+
+        Returns:
+            str: current value for the env variable
+        
+        Raises:
+            EnvironmentError: if there's no any environmental variable
+                with such name
+        """
         value = os.getenv(name)
         if value is None:
             raise EnvironmentError(
@@ -50,9 +67,16 @@ class Config:
             default: str | None = None
             ) -> str | None:
         """
-        Optional variable. Returns warning 
-        and default value if there's no
-        any value
+        Optional variable to upload. Returns warning 
+        and default value if there's no any value
+        
+        Args:
+            name (str): name of the environment variable
+            default (str, optional): default value for the variables
+                if there's no any value in .env file for this var
+        
+        Returns:
+            str: value for the environment var 
         """
         value = os.getenv(name, default)
         if value is None:
@@ -62,7 +86,17 @@ class Config:
         return value
 
     def _get_bot_token(self) -> str:
-        """Uploads bot token depending on the stand"""
+        """
+        Uploads bot token depending on the stand
+        
+        Returns:
+            str: value for the 'stand' environment:
+                should be 'DEV' or 'PROD' in the .env
+        
+        Raises:
+            EnvironmentError: if the environment variable
+                has any value then 'DEV' ors 'PROD'
+        """
         if self.stand == 'DEV':
             test_bot_token = self._get_required('TEST_BOT_TOKEN')
             return test_bot_token
@@ -77,6 +111,16 @@ class Config:
         """
         Load admin Telegram IDs
         from .env (required variable)
+
+        Returns:
+            list[int]: list of integers
+                with tg id's of the bot's admins
+        
+        Raises:
+            ValueError: if any of the admin's id's
+                contains non-integers in the '.env' file
+            RuntimeError: if there's no any integer
+                in the ADMINS var in .env file
         """
         admins_ids_str = self._get_required("ADMINS")
 
