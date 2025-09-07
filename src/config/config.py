@@ -12,13 +12,13 @@ class Config:
     def __init__(self, env_path: Path | None = None):
         """
         Initialize the Config object
-        
+
         Args:
             env_path (pathlib.Path, optional): path to the .env file
         """
         env_file = env_path or Path(".env")
         load_dotenv(dotenv_path=env_file, override=True)
-        
+
         self.logger = LocalLogger("config_logger")
 
         self.stand = self._get_required('STAND')
@@ -43,13 +43,13 @@ class Config:
     def _get_required(self, name: str) -> str:
         """
         Required variable to upload. Raise if there's no any
-        
+
         Args:
             name (str): name of the environment variable
 
         Returns:
             str: current value for the env variable
-        
+
         Raises:
             EnvironmentError: if there's no any environmental variable
                 with such name
@@ -69,12 +69,12 @@ class Config:
         """
         Optional variable to upload. Returns warning 
         and default value if there's no any value
-        
+
         Args:
             name (str): name of the environment variable
             default (str, optional): default value for the variables
                 if there's no any value in .env file for this var
-        
+
         Returns:
             str: value for the environment var 
         """
@@ -88,11 +88,11 @@ class Config:
     def _get_bot_token(self) -> str:
         """
         Uploads bot token depending on the stand
-        
+
         Returns:
             str: value for the 'stand' environment:
                 should be 'DEV' or 'PROD' in the .env
-        
+
         Raises:
             EnvironmentError: if the environment variable
                 has any value then 'DEV' ors 'PROD'
@@ -115,7 +115,7 @@ class Config:
         Returns:
             list[int]: list of integers
                 with tg id's of the bot's admins
-        
+
         Raises:
             ValueError: if any of the admin's id's
                 contains non-integers in the '.env' file
