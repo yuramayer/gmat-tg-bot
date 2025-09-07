@@ -14,7 +14,8 @@ class Config:
         Initialize the Config object
 
         Args:
-            env_path (pathlib.Path, optional): path to the .env file
+            env_path (pathlib.Path, optional):
+                path to the .env file
         """
         env_file = env_path or Path(".env")
         load_dotenv(dotenv_path=env_file, override=True)
@@ -51,13 +52,14 @@ class Config:
             str: current value for the env variable
 
         Raises:
-            EnvironmentError: if there's no any environmental variable
-                with such name
+            EnvironmentError: if there's no
+                any environmental variable with such name
         """
         value = os.getenv(name)
         if value is None:
             raise EnvironmentError(
-                f"❌ Missing required environment variable: {name}"
+                f"❌ Missing required environment "
+                f"variable: {name}"
                 )
         return value
 
@@ -72,8 +74,9 @@ class Config:
 
         Args:
             name (str): name of the environment variable
-            default (str, optional): default value for the variables
-                if there's no any value in .env file for this var
+            default (str, optional): default value
+                for the variables if there's
+                no any value in .env file for this var
 
         Returns:
             str: value for the environment var

@@ -17,7 +17,8 @@ class LocalLogger:
         Args:
             name (str, optional): name for the current logger,
                 default = 'local_logger'
-            level (int, optional): logging level, default = 'INFO'
+            level (int, optional): logging level,
+                default = 'INFO'
         """
         self.logger = logging.getLogger(name)
         self.logger.setLevel(level)
@@ -26,7 +27,8 @@ class LocalLogger:
         if not self.logger.handlers:
             handler = logging.StreamHandler()
             formatter = logging.Formatter(
-                "%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+                "%(asctime)s [%(levelname)s] "
+                "%(name)s: %(message)s",
                 datefmt="%Y-%m-%d %H:%M:%S"
             )
             handler.setFormatter(formatter)
