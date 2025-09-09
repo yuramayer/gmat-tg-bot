@@ -3,6 +3,7 @@
 import json
 import boto3
 from botocore.config import Config
+from src.local_logger import LocalLogger
 
 
 class S3Client:
@@ -28,6 +29,8 @@ class S3Client:
             region_name=region_name,
             config=Config(signature_version="s3v4")
         )
+        self.logger = LocalLogger("s3client_logger")
+        self.logger.info('The S3 client is initialized')
     
     @staticmethod
     def get_log_key(

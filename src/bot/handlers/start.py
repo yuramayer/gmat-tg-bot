@@ -16,7 +16,7 @@ async def cmd_start(
     """Handle /start command & log it"""
 
     s3_logger.log_message(
-        message=Message,
+        message=message,
         direction='inbound',
         text=message.text,
         router='start_router',
@@ -28,7 +28,7 @@ async def cmd_start(
     await message.answer('Hi!')
 
     s3_logger.log_message(
-        message=Message,
+        message=message,
         direction='outbound',
         text=msg_answer,
         router='start_router',

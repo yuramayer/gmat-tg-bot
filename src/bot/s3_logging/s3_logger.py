@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 from dataclasses import dataclass, field, asdict
 from aiogram.types import Message
 from src.bot.s3_logging.client import S3Client
+from src.local_logger import LocalLogger
 
 
 @dataclass
@@ -37,6 +38,8 @@ class S3Logger:
             s3_client: initialized S3Client instance
         """
         self._s3_client = s3_client
+        self.logger = LocalLogger("s3logger_logger")
+        self.logger.info('The S3 logger is initialized')
 
     def log_message(
             self,
