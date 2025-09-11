@@ -25,7 +25,7 @@ async def cmd_start(
     )
 
     msg_answer = 'Hi!'
-    await message.answer('Hi!')
+    await message.answer(msg_answer)
 
     s3_logger.log_message(
         message=message,
