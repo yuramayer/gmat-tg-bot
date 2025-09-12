@@ -18,7 +18,7 @@ def create_bot_dispatcher(
 
     Args:
         config (Config): Config loader for the app
-    
+
     Returns:
         tuple: Aiogram Bot & Dispatcher objects
     """

@@ -12,7 +12,7 @@ start_router = Router()
 async def cmd_start(
     message: Message,
     s3_logger: S3Logger
-    ):
+):
     """Handle /start command & log it"""
 
     s3_logger.log_message(

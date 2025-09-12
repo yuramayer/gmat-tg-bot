@@ -31,17 +31,17 @@ class S3Client:
         )
         self.logger = LocalLogger("s3client_logger")
         self.logger.info('The S3 client is initialized')
-    
+
     @staticmethod
     def get_log_key(
-        timestamp: str,
-        user_id: int
-        ) -> str:
+            timestamp: str,
+            user_id: int
+            ) -> str:
         """Generate partitioned S3 key for the log"""
         date, time_str = timestamp.split('T')
         hour = time_str[:2]
         return f"date={date}/hour={hour}/{user_id}_{timestamp}.json"
-    
+
     def send_logs(
             self,
             logs_json: dict,

@@ -50,7 +50,7 @@ class S3Logger:
             router: str,
             method: str,
             event_type: str
-        ) -> None:
+            ) -> None:
         """
         Log the action & send the log to the S3
 
@@ -68,7 +68,7 @@ class S3Logger:
         """
         log_obj = MessageLog(
             chat_id=message.chat.id,
-            message_id = message.message_id,
+            message_id=message.message_id,
             direction=direction,
             text=text,
             router=router,
