@@ -15,7 +15,7 @@ class UserRepository:
     def __init__(
             self,
             session_factory: async_sessionmaker[AsyncSession]
-        ):
+            ):
         """
         Initialize the UserRepository object
 
@@ -23,17 +23,17 @@ class UserRepository:
             session (async_sessionmaker): AsyncSession for the PostgreSQL
         """
         self._session_factory = session_factory
-    
+
     async def get_by_tg_id(
             self,
             tg_id: int
-        ) -> User | None:
+            ) -> User | None:
         """
         Find user by Telegram ID
-        
+
         Args:
             tg_id (int): user's telegram chat id
-        
+
         Returns:
             User (optional): user's info
                 from the 'users' table.
@@ -50,14 +50,14 @@ class UserRepository:
             self,
             tg_id: int,
             username: str
-        ) -> User:
+            ) -> User:
         """
         Add new user to the table
-        
+
         Args:
             tg_id (int): user's telegram chat id
             username (str): telegram username
-        
+
         Returns:
             User: user's info
                 as from the 'users' table

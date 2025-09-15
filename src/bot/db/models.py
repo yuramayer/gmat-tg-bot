@@ -16,4 +16,3 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     tg_id = Column(String, unique=True, nullable=False)
     username = Column(String, nullable=True)
-

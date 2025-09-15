@@ -20,9 +20,9 @@ class Database:
             ):
         """
         Initialize the Database object
-        
+
         Args:
-            db_url: uniform resource locator 
+            db_url: uniform resource locator
                 for the PostgreSQL DB
         """
         self._engine = create_async_engine(
@@ -35,7 +35,7 @@ class Database:
             expire_on_commit=False,
             class_=AsyncSession
         )
-    
+
     async def get_session(self) -> AsyncSession:
         """Return new async session"""
         return self._session_factory()
