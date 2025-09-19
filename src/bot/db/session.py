@@ -5,13 +5,9 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine
 )
-from sqlalchemy.orm import declarative_base
+from src.bot.db.models import Base
 
-
-Base = declarative_base()
-
-
-class Database:
+class DatabaseConnection:
     """Async database connection manager"""
 
     def __init__(
@@ -35,6 +31,12 @@ class Database:
             expire_on_commit=False,
             class_=AsyncSession
         )
+
+    async def get_session_factory(
+            self
+            ) -> async_sessionmaker[AsyncSession]:
+        """Return factory for the async sessions"""
+        return self._session_factory
 
     async def get_session(self) -> AsyncSession:
         """Return new async session"""

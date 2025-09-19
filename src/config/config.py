@@ -40,6 +40,7 @@ class Config:
         self.db_port = self._get_required('DB_PORT')
         self.db_user = self._get_required('DB_USER')
         self.db_pass = self._get_required('DB_PASS')
+        self.db_url = ...
 
     def _get_required(self, name: str) -> str:
         """

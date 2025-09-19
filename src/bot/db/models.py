@@ -5,7 +5,9 @@ from sqlalchemy import (
     Integer,
     String
 )
-from src.bot.db.session import Base
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
 
 
 class User(Base):

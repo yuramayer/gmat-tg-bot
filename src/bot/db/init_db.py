@@ -9,7 +9,7 @@ from sqlalchemy.ext.asyncio import (
 )
 from sqlalchemy import text, select
 
-from src.bot.db.session import Base
+from src.bot.db.models import Base
 from src.bot.db.models import User
 
 

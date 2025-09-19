@@ -6,6 +6,8 @@ from aiogram.client.bot import DefaultBotProperties
 from aiogram.enums import ParseMode
 from src.bot.s3_logging.client import S3Client
 from src.bot.s3_logging.s3_logger import S3Logger
+from src.bot.db.session import DatabaseConnection 
+from src.bot.middlewares.db_session import DbSessionMiddleware
 from src.config.config import Config
 
 
@@ -28,6 +30,8 @@ def create_bot_dispatcher(
             parse_mode=ParseMode.HTML
         )
     )
+    db = DatabaseConnection(config.db_url)
+
     dp = Dispatcher(storage=MemoryStorage())
 
     s3_client = S3Client(
@@ -38,6 +42,11 @@ def create_bot_dispatcher(
     s3_logger = S3Logger(
         s3_client
     )
+
+    dp.message.middleware(
+        DbSessionMiddleware(
+            db.get_session_factory()
+        ))
 
     dp['config'] = config
     dp['s3_logger'] = s3_logger
